@@ -49,11 +49,12 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
     public function qrcodeUrlFunction($text, $extension = 'png', $size = 200)
     {
         $router = $this->container->get('router');
+
         $url = $router->generate('endroid_qrcode', array(
             'text' => $text,
             'extension' => $extension,
             'size' => $size,
-        ));
+        ), true);
 
         return $url;
     }
