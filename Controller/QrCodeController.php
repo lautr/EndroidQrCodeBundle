@@ -24,13 +24,13 @@ class QrCodeController extends Controller
 {
     /**
      *
-     * @Route("/{text}.{extension}", name="endroid_qrcode", requirements={"text"="[\w\W]+", "extension"="jpg|png|gif"})
+     * @Route("/{size}/{text}.{extension}", name="endroid_qrcode", requirements={"text"="[\w\W]+", "extension"="jpg|png|gif"})
      *
      */
-    public function generateAction(Request $request, $text, $extension)
+    public function generateAction($text, $extension, $size)
     {
         $qrCode = new QrCode();
-        if($size = $request->get('size')) $qrCode->setSize($size);
+        $qrCode->setSize($size);
         $qrCode->setText($text);
         $qrCode = $qrCode->get($extension);
 

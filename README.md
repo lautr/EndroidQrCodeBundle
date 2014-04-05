@@ -71,6 +71,7 @@ The bundle also provides a Twig extension for quickly generating QR code urls.
 
 ``` twig
 <img src="{{ qrcode_url(message) }}" />
+<img src="{{ qrcode_url(message, 'png', 150) }}" />
 ```
 
 ## Configuration
