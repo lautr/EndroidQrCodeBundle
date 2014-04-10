@@ -9,13 +9,13 @@
 
 namespace Endroid\Bundle\QrCodeBundle\Controller;
 
+use Endroid\QrCode\QrCode;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
-use Endroid\QrCode\QrCode;
 
 /**
  * QR code controller.
@@ -24,13 +24,15 @@ class QrCodeController extends Controller
 {
     /**
      *
-     * @Route("/{size}/{text}.{extension}", name="endroid_qrcode", requirements={"text"="[\w\W]+", "extension"="jpg|png|gif"})
+     * @Route("/{text}.{extension}", name="endroid_qrcode", requirements={"text"="[\w\W]+", "extension"="jpg|png|gif"})
      *
      */
-    public function generateAction($text, $extension, $size)
+    public function generateAction(Request $request, $text, $extension)
     {
         $qrCode = new QrCode();
-        $qrCode->setSize($size);
+        if ($size = $request->get('size')) {
+            $qrCode->setSize($size);
+        }
         $qrCode->setText($text);
         $qrCode = $qrCode->get($extension);
 
