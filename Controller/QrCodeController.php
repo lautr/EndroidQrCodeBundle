@@ -33,6 +33,9 @@ class QrCodeController extends Controller
         if ($size = $request->get('size')) {
             $qrCode->setSize($size);
         }
+        if (($padding = $request->get('padding')) !== null) {
+            $qrCode->setPadding($padding);
+        }
         $qrCode->setText($text);
         $qrCode = $qrCode->get($extension);
 

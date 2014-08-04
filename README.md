@@ -67,11 +67,12 @@ EndroidQrCodeBundle:
 
 ## Twig extension
 
-The bundle also provides a Twig extension for quickly generating QR code urls.
+The bundle also provides a Twig extension for quickly generating QR code urls. Optional parameters are extension, size and padding.
 
 ``` twig
 <img src="{{ qrcode_url(message) }}" />
 <img src="{{ qrcode_url(message, 'png', 150) }}" />
+<img src="{{ qrcode_url(message, 'png', 150, 15) }}" />
 ```
 
 ## Configuration
