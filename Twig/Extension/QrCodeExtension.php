@@ -9,6 +9,7 @@
 
 namespace Endroid\Bundle\QrCodeBundle\Twig\Extension;
 
+use Endroid\QrCode\QrCode;
 use Twig_Extension;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -34,12 +35,13 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
     public function getFunctions()
     {
         return array(
-            'qrcode_url' => new \Twig_Function_Method($this, 'qrcodeUrlFunction')
+            'qrcode_url' => new \Twig_Function_Method($this, 'qrcodeUrlFunction'),
+            'qrcode_data_uri' => new \Twig_Function_Method($this, 'qrcodeDataUriFunction')
         );
     }
 
     /**
-     * Creates the QR code URL corresponding to the given message and extension.
+     * Creates the QR code URL corresponding to the given message.
      *
      * @param $text
      * @param  string $extension
@@ -71,6 +73,40 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
         ), true);
 
         return $url;
+    }
+
+    /**
+     * Creates the QR code data corresponding to the given message.
+     *
+     * @param $text
+     * @param  string $extension
+     * @param  int    $size
+     * @param  int    $padding
+     * @return mixed
+     */
+    public function qrcodeDataUriFunction($text, $extension = null, $size = null, $padding = null)
+    {
+        if ($extension === null) {
+            $extension = $this->container->getParameter('endroid_qrcode.extension');
+        }
+
+        if ($size === null) {
+            $size = $this->container->getParameter('endroid_qrcode.size');
+        }
+
+        if ($padding === null) {
+            $padding = $this->container->getParameter('endroid_qrcode.padding');
+        }
+
+        $dataUri = (new QrCode())
+            ->setText($text)
+            ->setSize($size)
+            ->setPadding($padding)
+            ->setExtension($extension)
+            ->getDataUri()
+        ;
+
+        return $dataUri;
     }
 
     /**
