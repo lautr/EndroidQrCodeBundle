@@ -98,7 +98,8 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
             $padding = $this->container->getParameter('endroid_qrcode.padding');
         }
 
-        $dataUri = (new QrCode())
+        $dataUri = new QrCode();
+        $dataUri = $dataUri
             ->setText($text)
             ->setSize($size)
             ->setPadding($padding)
