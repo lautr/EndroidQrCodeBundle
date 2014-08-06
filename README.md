@@ -7,8 +7,9 @@ Endroid QR Code Bundle
 [![Latest Stable Version](https://poser.pugx.org/endroid/qrcode-bundle/v/stable.png)](https://packagist.org/packages/endroid/qrcode-bundle)
 [![Total Downloads](https://poser.pugx.org/endroid/qrcode-bundle/downloads.png)](https://packagist.org/packages/endroid/qrcode-bundle)
 
-This bundle provides a default controller for generating QR codes using the Endroid QR Code (endroid/QrCode) library. No
-configuration or extension loading is required. You only need to load the routing file.
+This bundle provides a default controller for generating QR codes using the
+Endroid QR Code (endroid/QrCode) library. No configuration or extension loading
+is required. You only need to load the routing file.
 
 [![knpbundles.com](http://knpbundles.com/endroid/EndroidQrCodeBundle/badge-short)](http://knpbundles.com/endroid/EndroidQrCodeBundle)
 
@@ -65,19 +66,31 @@ EndroidQrCodeBundle:
     prefix:     /qrcode
 ```
 
+## Configuration
+
+The default QR code generation parameters can be overridden via the
+configuration. All parameters are optional.
+
+### config.yml
+
+```yaml
+endroid_qr_code:
+    size: 100
+    padding: 10
+    extension: gif
+```
+
 ## Twig extension
 
-The bundle also provides a Twig extension for quickly generating QR code urls. Optional parameters are extension, size and padding.
+The bundle also provides a Twig extension for quickly generating QR code urls.
+Optional parameters are extension, size and padding. When a parameter is
+omitted, the value in the bundle configuration is used.
 
 ``` twig
 <img src="{{ qrcode_url(message) }}" />
-<img src="{{ qrcode_url(message, 'png', 150) }}" />
-<img src="{{ qrcode_url(message, 'png', 150, 15) }}" />
+<img src="{{ qrcode_url(message, extension='png') }}" />
+<img src="{{ qrcode_url(message, size=150) }}" />
 ```
-
-## Configuration
-
-No configuration required.
 
 ## Usage
 
