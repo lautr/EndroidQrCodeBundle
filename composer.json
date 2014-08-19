@@ -1,5 +1,5 @@
 {
-    "name": "endroid/qrcode-bundle",
+    "name": "lautr/qrcode-bundle",
     "description": "Endroid Qr Code Bundle for Symfony",
     "keywords": ["endroid", "qrcode", "qr", "code", "symfony", "bundle"],
     "homepage": "https://github.com/endroid/EndroidQrCodeBundle",
