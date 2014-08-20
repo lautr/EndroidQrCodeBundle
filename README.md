@@ -81,6 +81,8 @@ Alpha channel available range is [0, 127] in foreground and background colors.
 
 ## Twig extension
 
+# QR Codes
+
 The bundle also provides a Twig extension for quickly generating QR code urls.
 Optional parameters are extension, size, padding and errorCorrectionLevel. When
 a parameter is omitted, the value in the bundle configuration is used.
@@ -96,6 +98,14 @@ instead of requiring a separate HTTP request to load your image.
 
 ``` twig
 <img src="{{ qrcode_data_uri(message, size=200, padding=10) }}" />
+```
+# Bar Codes
+
+``` twig
+<img src="{{ barcode_url(message) }}" />
+<img src="{{ barcode_url(message, extension='png') }}" />
+<img src="{{ barcode_url(message, size=150) }}" />
+<img src="{{ barcode_url(message, type='Code128') }}" />
 ```
 
 ## Usage
