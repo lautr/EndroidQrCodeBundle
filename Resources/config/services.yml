@@ -5,3 +5,11 @@ services:
             - { name: twig.extension }
         calls:
             - [ setContainer, [ @service_container ] ]
+
+    endroid.barcode.twig.extension:
+        class: Endroid\Bundle\QrCodeBundle\Twig\Extension\BarCodeExtension
+        arguments: [  ]
+        tags:
+            - { name: twig.extension }
+        calls:
+            - [ setContainer, [ @service_container ] ]
