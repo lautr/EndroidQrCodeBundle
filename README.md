@@ -20,6 +20,8 @@ Endroid QR Code (endroid/QrCode) library.
 * Symfony
 * Dependencies:
  * [`QrCode`](https://github.com/endroid/QrCode)
+ * [`zend-validator`](https://packagist.org/packages/zendframework/zend-validator)
+ * [`zend-barcode`](https://packagist.org/packages/zendframework/zend-barcode)
 
 ## Installation
 
