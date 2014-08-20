@@ -15,6 +15,10 @@ Endroid QR Code (endroid/QrCode) library.
 
 [![knpbundles.com](http://knpbundles.com/endroid/EndroidQrCodeBundle/badge-short)](http://knpbundles.com/endroid/EndroidQrCodeBundle)
 
+## Fork
+
+This forks implements some barcode functionality
+
 ## Requirements
 
 * Symfony
