@@ -3,7 +3,7 @@ Endroid QR Code Bundle
 
 *By [endroid](http://endroid.nl/)*
 
-[![Latest Stable Version](http://img.shields.io/packagist/v/endroid/-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
+[![Latest Stable Version](http://img.shields.io/packagist/v/endroid/qrcode-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
 [![Build Status](http://img.shields.io/travis/endroid/EndroidQrCodeBundle.svg)](http://travis-ci.org/endroid/EndroidQrCodeBundle)
 [![Latest Stable Version](https://poser.pugx.org/endroid/qrcode-bundle/v/stable.png)](https://packagist.org/packages/endroid/qrcode-bundle)
 [![Total Downloads](http://img.shields.io/packagist/dt/endroid/qrcode-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
