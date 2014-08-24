@@ -3,9 +3,12 @@ Endroid QR Code Bundle
 
 *By [endroid](http://endroid.nl/)*
 
-[![Build Status](https://secure.travis-ci.org/endroid/EndroidQrCodeBundle.png)](http://travis-ci.org/endroid/EndroidQrCodeBundle)
+[![Latest Stable Version](http://img.shields.io/packagist/v/endroid/-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
+[![Build Status](http://img.shields.io/travis/endroid/EndroidQrCodeBundle.svg)](http://travis-ci.org/endroid/EndroidQrCodeBundle)
 [![Latest Stable Version](https://poser.pugx.org/endroid/qrcode-bundle/v/stable.png)](https://packagist.org/packages/endroid/qrcode-bundle)
-[![Total Downloads](https://poser.pugx.org/endroid/qrcode-bundle/downloads.png)](https://packagist.org/packages/endroid/qrcode-bundle)
+[![Total Downloads](http://img.shields.io/packagist/dt/endroid/qrcode-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
+[![License](http://img.shields.io/packagist/l/endroid/qrcode-bundle.svg)](https://packagist.org/packages/endroid/qrcode-bundle)
+[![PayPayl donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RGH86QN825TWN "Keep me off the streets")
 
 This bundle provides a default controller for generating QR codes using the
 Endroid QR Code (endroid/QrCode) library.
