@@ -81,13 +81,14 @@ endroid_qr_code:
     size: 100
     padding: 10
     extension: gif
+    error_correction_level: high
 ```
 
 ## Twig extension
 
 The bundle also provides a Twig extension for quickly generating QR code urls.
-Optional parameters are extension, size and padding. When a parameter is
-omitted, the value in the bundle configuration is used.
+Optional parameters are extension, size, padding and errorCorrectionLevel. When
+a parameter is omitted, the value in the bundle configuration is used.
 
 ``` twig
 <img src="{{ qrcode_url(message) }}" />

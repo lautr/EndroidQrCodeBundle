@@ -38,6 +38,16 @@ class Configuration implements ConfigurationInterface
                         ->cannotBeEmpty()
                         ->defaultValue($config['extension'])
                     ->end()
+                    ->scalarNode('error_correction_level')
+                        ->cannotBeEmpty()
+                        ->defaultValue($config['error_correction_level'])
+                        ->validate()
+                            ->ifTrue(function ($value) {
+                                return !defined('Endroid\QrCode\QrCode::LEVEL_'.strtoupper($value));
+                            })
+                            ->thenInvalid('Invalid error correction level "%s"')
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;

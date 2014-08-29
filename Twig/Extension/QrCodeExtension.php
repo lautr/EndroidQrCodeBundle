@@ -82,9 +82,10 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * @param  string $extension
      * @param  int    $size
      * @param  int    $padding
+     * @param  int    $errorCorrectionLevel
      * @return mixed
      */
-    public function qrcodeDataUriFunction($text, $extension = null, $size = null, $padding = null)
+    public function qrcodeDataUriFunction($text, $extension = null, $size = null, $padding = null, $errorCorrectionLevel = null)
     {
         if ($extension === null) {
             $extension = $this->container->getParameter('endroid_qrcode.extension');
@@ -98,12 +99,17 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
             $padding = $this->container->getParameter('endroid_qrcode.padding');
         }
 
+        if ($errorCorrectionLevel === null) {
+            $errorCorrectionLevel = $this->container->getParameter('endroid_qrcode.error_correction_level');
+        }
+
         $dataUri = new QrCode();
         $dataUri = $dataUri
             ->setText($text)
             ->setSize($size)
             ->setPadding($padding)
             ->setExtension($extension)
+            ->setErrorCorrection($errorCorrectionLevel)
             ->getDataUri()
         ;
 

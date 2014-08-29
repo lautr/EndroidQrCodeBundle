@@ -28,5 +28,6 @@ class EndroidQrCodeExtension extends Extension
         $container->setParameter('endroid_qrcode.size', $config['size']);
         $container->setParameter('endroid_qrcode.padding', $config['padding']);
         $container->setParameter('endroid_qrcode.extension', $config['extension']);
+        $container->setParameter('endroid_qrcode.error_correction_level', $config['error_correction_level']);
     }
 }
