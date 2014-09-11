@@ -43,6 +43,7 @@ class BarCodeController extends Controller
         $barcodeOptions = [
             'text' => $text,
             'barHeight' => $request->get('size'),
+            'factor' => $request->get('factor')
         ];
 
         $barcodeClass = '\Zend\Barcode\Object\\' .  $request->get('type', 'Code128');

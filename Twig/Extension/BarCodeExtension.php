@@ -48,14 +48,15 @@ class BarCodeExtension extends Twig_Extension implements ContainerAwareInterface
 
     /**
      * Creates the QR code URL corresponding to the given message.
+     * @param      $text
+     * @param null $extension
+     * @param null $size
+     * @param null $type
+     * @param int  $factor
      *
-     * @param $text
-     * @param  string $extension
-     * @param  int    $size
-     * @param  string $type
      * @return mixed
      */
-    public function barcodeUrlFunction($text, $extension = null, $size = null, $type = null)
+    public function barcodeUrlFunction($text, $extension = null, $size = null, $type = null, $factor = 1)
     {
         $router = $this->container->get('router');
 
@@ -72,6 +73,7 @@ class BarCodeExtension extends Twig_Extension implements ContainerAwareInterface
             'extension' => $extension,
             'size' => $size,
             'type' => $type,
+            'factor' => $factor,
         ), true);
 
         return $url;
