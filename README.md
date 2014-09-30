@@ -110,6 +110,10 @@ the QR code text to the url as mounted, followed by .png, .jpg or .gif.
 
 ![QR Code](http://endroid.nl/qrcode/Life%20is%20too%20short%20to%20be%20generating%20QR%20codes.png)
 
+## Versioning
+
+Semantic versioning ([semver](http://semver.org/)) is applied.
+
 ## License
 
 This bundle is under the MIT license. For the full copyright and license information, please view the LICENSE file that
