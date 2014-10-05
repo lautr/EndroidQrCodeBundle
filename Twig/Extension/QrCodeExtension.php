@@ -102,6 +102,12 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
         if ($errorCorrectionLevel === null) {
             $errorCorrectionLevel = $this->container->getParameter('endroid_qrcode.error_correction_level');
         }
+        
+        // Resolve error correction level to the appropriate constant
+        if (!is_numeric ($errorCorrectionLevel)) {
+            $levelConstant = 'Endroid\QrCode\QrCode::LEVEL_'.strtoupper($errorCorrectionLevel);
+            $errorCorrectionLevel = constant ($levelConstant);
+        }
 
         $dataUri = new QrCode();
         $dataUri = $dataUri
