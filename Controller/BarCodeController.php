@@ -56,16 +56,24 @@ class BarCodeController extends Controller
 
         $rendererOptions = [];
 
-        $renderer = new \Zend\Barcode\Renderer\Image( $rendererOptions );
+        $renderer = new \Zend\Barcode\Renderer\Image($rendererOptions);
 
-        $renderer->setBarcode( $barcode )->render();
+        // not really happy with that, but the best way i found so far to use the zend component
+        ob_start(); // start buffer
+        if ('png' === $extension) {
+            imagepng($renderer->setBarcode($barcode)->draw()); // render response
+        } else {
+            imagejpeg($renderer->setBarcode($barcode)->draw()); // render response
+        }
+        $response = ob_get_contents(); // read response from buffer
+        ob_end_clean(); // delete buffer
 
-        $mime_type = 'image/'.$extension;
+        $mimeType = 'image/'.$extension;
         if ($extension == 'jpg') {
-            $mime_type = 'image/jpeg';
+            $mimeType = 'image/jpeg';
         }
 
-        return new Response($renderer, null, ['Content-Type' => $mime_type]);
+        return new Response($response, 200, ['Content-Type' => $mimeType]);
     }
 
 }
