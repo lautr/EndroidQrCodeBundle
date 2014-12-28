@@ -82,6 +82,8 @@ endroid_qr_code:
     padding: 10
     extension: gif
     error_correction_level: high
+    foreground_color: { r: 0, g: 0, b: 0, a: 0 }
+    background_color: { r: 255, g: 255, b: 255, a: 0 }
 ```
 
 ## Twig extension
