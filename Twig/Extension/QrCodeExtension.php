@@ -10,6 +10,7 @@
 namespace Endroid\Bundle\QrCodeBundle\Twig\Extension;
 
 use Endroid\QrCode\QrCode;
+use Symfony\Component\DependencyInjection\Container;
 use Twig_Extension;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -17,12 +18,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
 {
     /**
-     * {@inheritdoc}
+     * @var Container
      */
     protected $container;
 
     /**
-     * {@inheritdoc}
+     * @param ContainerInterface $container
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -36,7 +37,7 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
     {
         return array(
             'qrcode_url' => new \Twig_Function_Method($this, 'qrcodeUrlFunction'),
-            'qrcode_data_uri' => new \Twig_Function_Method($this, 'qrcodeDataUriFunction')
+            'qrcode_data_uri' => new \Twig_Function_Method($this, 'qrcodeDataUriFunction'),
         );
     }
 
@@ -44,82 +45,113 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * Creates the QR code URL corresponding to the given message.
      *
      * @param $text
-     * @param  string $extension
      * @param  int    $size
      * @param  int    $padding
+     * @param  string $extension
+     * @param  string $errorCorrectionLevel
+     * @param  array  $foregroundColor
+     * @param  array  $backgroundColor
      * @return mixed
      */
-    public function qrcodeUrlFunction($text, $extension = null, $size = null, $padding = null)
+    public function qrcodeUrlFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null)
     {
-        $router = $this->container->get('router');
-
-        if ($extension === null) {
-            $extension = $this->container->getParameter('endroid_qrcode.extension');
-        }
-
-        if ($size === null) {
-            $size = $this->container->getParameter('endroid_qrcode.size');
-        }
-
-        if ($padding === null) {
-            $padding = $this->container->getParameter('endroid_qrcode.padding');
-        }
-
-        $url = $router->generate('endroid_qrcode', array(
+        $params = array(
             'text' => $text,
-            'extension' => $extension,
-            'size' => $size,
-            'padding' => $padding,
-        ), true);
+        );
 
-        return $url;
+        if ($size !== null) {
+            $params['size'] = $size;
+        }
+
+        if ($padding !== null) {
+            $params['padding'] = $padding;
+        }
+
+        if ($extension !== null) {
+            $params['extension'] = $extension;
+        }
+
+        if ($errorCorrectionLevel !== null) {
+            $params['error_correction_level'] = $errorCorrectionLevel;
+        }
+
+        if ($foregroundColor !== null) {
+            $params['foreground_color'] = $foregroundColor;
+        }
+
+        if ($backgroundColor !== null) {
+            $params['background_color'] = $backgroundColor;
+        }
+
+        return $this->container->get('router')->generate('endroid_qrcode', $params, true);
     }
 
     /**
      * Creates the QR code data corresponding to the given message.
      *
      * @param $text
-     * @param  string $extension
      * @param  int    $size
      * @param  int    $padding
-     * @param  int    $errorCorrectionLevel
-     * @return mixed
+     * @param  string $extension
+     * @param  mixed  $errorCorrectionLevel
+     * @param  array  $foregroundColor
+     * @param  array  $backgroundColor
+     * @return string
      */
-    public function qrcodeDataUriFunction($text, $extension = null, $size = null, $padding = null, $errorCorrectionLevel = null)
+    public function qrcodeDataUriFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null)
     {
-        if ($extension === null) {
-            $extension = $this->container->getParameter('endroid_qrcode.extension');
-        }
-
-        if ($size === null) {
+        if ($size === null && $this->container->hasParameter('endroid_qrcode.size')) {
             $size = $this->container->getParameter('endroid_qrcode.size');
         }
 
-        if ($padding === null) {
+        if ($padding === null && $this->container->hasParameter('endroid_qrcode.padding')) {
             $padding = $this->container->getParameter('endroid_qrcode.padding');
         }
 
-        if ($errorCorrectionLevel === null) {
+        if ($extension === null && $this->container->hasParameter('endroid_qrcode.extension')) {
+            $extension = $this->container->getParameter('endroid_qrcode.extension');
+        }
+
+        if ($errorCorrectionLevel === null && $this->container->hasParameter('endroid_qrcode.error_correction_level')) {
             $errorCorrectionLevel = $this->container->getParameter('endroid_qrcode.error_correction_level');
         }
-        
-        // Resolve error correction level to the appropriate constant
-        if (!is_numeric ($errorCorrectionLevel)) {
-            $levelConstant = 'Endroid\QrCode\QrCode::LEVEL_'.strtoupper($errorCorrectionLevel);
-            $errorCorrectionLevel = constant ($levelConstant);
+
+        if ($foregroundColor === null && $this->container->hasParameter('endroid_qrcode.foreground_color')) {
+            $foregroundColor = $this->container->getParameter('endroid_qrcode.foreground_color');
         }
 
-        $dataUri = new QrCode();
-        $dataUri = $dataUri
-            ->setText($text)
-            ->setSize($size)
-            ->setPadding($padding)
-            ->setExtension($extension)
-            ->setErrorCorrection($errorCorrectionLevel)
-            ->getDataUri()
-        ;
+        if ($backgroundColor === null && $this->container->hasParameter('endroid_qrcode.background_color')) {
+            $backgroundColor = $this->container->getParameter('endroid_qrcode.background_color');
+        }
 
-        return $dataUri;
+        $qrCode = new QrCode();
+        $qrCode->setText($text);
+
+        if ($size !== null) {
+            $qrCode->setSize($size);
+        }
+
+        if ($padding !== null) {
+            $qrCode->setPadding($padding);
+        }
+
+        if ($extension !== null) {
+            $qrCode->setExtension($extension);
+        }
+
+        if ($errorCorrectionLevel !== null) {
+            $qrCode->setErrorCorrection($errorCorrectionLevel);
+        }
+
+        if ($foregroundColor !== null) {
+            $qrCode->setForegroundColor($foregroundColor);
+        }
+
+        if ($backgroundColor !== null) {
+            $qrCode->setBackgroundColor($backgroundColor);
+        }
+
+        return $qrCode->getDataUri();
     }
 
     /**

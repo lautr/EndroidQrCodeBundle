@@ -19,7 +19,7 @@ class QrCodeControllerTest extends WebTestCase
         $client->request('GET', $client->getContainer()->get('router')->generate('endroid_qrcode', array(
             'text' => 'Life is too short to be generating QR codes',
             'extension' => 'png',
-            'size' => 150
+            'size' => 150,
         )));
 
         return $this->assertEquals(200, $client->getResponse()->getStatusCode());

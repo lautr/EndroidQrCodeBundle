@@ -10,7 +10,6 @@
 namespace Endroid\Bundle\QrCodeBundle\Controller;
 
 use Endroid\QrCode\QrCode;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,13 +28,28 @@ class QrCodeController extends Controller
     public function generateAction(Request $request, $text, $extension)
     {
         $qrCode = new QrCode();
-        if ($size = $request->get('size')) {
-            $qrCode->setSize($size);
-        }
-        if (($padding = $request->get('padding')) !== null) {
-            $qrCode->setPadding($padding);
-        }
         $qrCode->setText($text);
+
+        if ($request->get('size') !== null) {
+            $qrCode->setSize($request->get('size'));
+        }
+
+        if ($request->get('padding') !== null) {
+            $qrCode->setPadding($request->get('padding'));
+        }
+
+        if ($request->get('error_correction_level') !== null) {
+            $qrCode->setErrorCorrection($request->get('error_correction_level'));
+        }
+
+        if ($request->get('foreground_color') !== null) {
+            $qrCode->setForegroundColor($request->get('foreground_color'));
+        }
+
+        if ($request->get('background_color') !== null) {
+            $qrCode->setBackgroundColor($request->get('background_color'));
+        }
+
         $qrCode = $qrCode->get($extension);
 
         $mime_type = 'image/'.$extension;

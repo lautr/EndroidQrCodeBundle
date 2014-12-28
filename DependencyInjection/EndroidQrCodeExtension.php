@@ -17,6 +17,9 @@ use Symfony\Component\Config\FileLocator;
 
 class EndroidQrCodeExtension extends Extension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
@@ -25,9 +28,28 @@ class EndroidQrCodeExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('endroid_qrcode.size', $config['size']);
-        $container->setParameter('endroid_qrcode.padding', $config['padding']);
-        $container->setParameter('endroid_qrcode.extension', $config['extension']);
-        $container->setParameter('endroid_qrcode.error_correction_level', $config['error_correction_level']);
+        if (isset($config['size'])) {
+            $container->setParameter('endroid_qrcode.size', $config['size']);
+        }
+
+        if (isset($config['padding'])) {
+            $container->setParameter('endroid_qrcode.padding', $config['padding']);
+        }
+
+        if (isset($config['extension'])) {
+            $container->setParameter('endroid_qrcode.extension', $config['extension']);
+        }
+
+        if (isset($config['error_correction_level'])) {
+            $container->setParameter('endroid_qrcode.error_correction_level', $config['error_correction_level']);
+        }
+
+        if (isset($config['foreground_color'])) {
+            $container->setParameter('endroid_qrcode.foreground_color', $config['foreground_color']);
+        }
+
+        if (isset($config['background_color'])) {
+            $container->setParameter('endroid_qrcode.background_color', $config['background_color']);
+        }
     }
 }
