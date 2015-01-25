@@ -51,9 +51,12 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * @param  string $errorCorrectionLevel
      * @param  array  $foregroundColor
      * @param  array  $backgroundColor
+     * @param  string $label
+     * @param  string $labelFontSize
+     * @param  string $labelFontPath
      * @return mixed
      */
-    public function qrcodeUrlFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null)
+    public function qrcodeUrlFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null, $label = null, $labelFontSize = null, $labelFontPath = null)
     {
         $params = array(
             'text' => $text,
@@ -83,6 +86,18 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
             $params['background_color'] = $backgroundColor;
         }
 
+        if ($label !== null) {
+            $params['label'] = $label;
+        }
+
+        if ($labelFontSize !== null) {
+            $params['label_font_size'] = $labelFontSize;
+        }
+
+        if ($labelFontPath !== null) {
+            $params['label_font_path'] = $labelFontPath;
+        }
+
         return $this->container->get('router')->generate('endroid_qrcode', $params, true);
     }
 
@@ -96,9 +111,12 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * @param  mixed  $errorCorrectionLevel
      * @param  array  $foregroundColor
      * @param  array  $backgroundColor
+     * @param  string $label
+     * @param  string $labelFontSize
+     * @param  string $labelFontPath
      * @return string
      */
-    public function qrcodeDataUriFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null)
+    public function qrcodeDataUriFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null, $label = null, $labelFontSize = null, $labelFontPath = null)
     {
         if ($size === null && $this->container->hasParameter('endroid_qrcode.size')) {
             $size = $this->container->getParameter('endroid_qrcode.size');
@@ -122,6 +140,18 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
 
         if ($backgroundColor === null && $this->container->hasParameter('endroid_qrcode.background_color')) {
             $backgroundColor = $this->container->getParameter('endroid_qrcode.background_color');
+        }
+
+        if ($label === null && $this->container->hasParameter('endroid_qrcode.label')) {
+            $label = $this->container->getParameter('endroid_qrcode.label');
+        }
+
+        if ($labelFontSize === null && $this->container->hasParameter('endroid_qrcode.label_font_size')) {
+            $labelFontSize = $this->container->getParameter('endroid_qrcode.label_font_size');
+        }
+
+        if ($labelFontPath === null && $this->container->hasParameter('endroid_qrcode.label_font_path')) {
+            $labelFontPath = $this->container->getParameter('endroid_qrcode.label_font_path');
         }
 
         $qrCode = new QrCode();
@@ -149,6 +179,18 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
 
         if ($backgroundColor !== null) {
             $qrCode->setBackgroundColor($backgroundColor);
+        }
+
+        if ($label != null) {
+            $qrCode->setLabel($label);
+        }
+
+        if ($labelFontSize != null) {
+            $qrCode->setLabelFontSize($labelFontSize);
+        }
+
+        if ($labelFontPath != null) {
+            $qrCode->setLabelFontPath($labelFontPath);
         }
 
         return $qrCode->getDataUri();

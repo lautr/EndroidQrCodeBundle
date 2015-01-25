@@ -50,6 +50,14 @@ class QrCodeController extends Controller
             $qrCode->setBackgroundColor($request->get('background_color'));
         }
 
+        if ($request->get('label') !== null) {
+            $qrCode->setLabel($request->get('label'));
+        }
+
+        if ($request->get('labelFontSize') !== null) {
+            $qrCode->setLabelFontSize($request->get('labelFontSize'));
+        }
+
         $qrCode = $qrCode->get($extension);
 
         $mime_type = 'image/'.$extension;

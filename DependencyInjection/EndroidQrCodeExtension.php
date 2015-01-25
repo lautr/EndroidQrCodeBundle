@@ -51,5 +51,17 @@ class EndroidQrCodeExtension extends Extension
         if (isset($config['background_color'])) {
             $container->setParameter('endroid_qrcode.background_color', $config['background_color']);
         }
+
+        if (isset($config['label'])) {
+            $container->setParameter('endroid_qrcode.label', $config['label']);
+        }
+
+        if (isset($config['label_font_size'])) {
+            $container->setParameter('endroid_qrcode.label_font_size', $config['label_font_size']);
+        }
+
+        if (isset($config['label_font_path'])) {
+            $container->setParameter('endroid_qrcode.label_font_path', $config['label_font_path']);
+        }
     }
 }

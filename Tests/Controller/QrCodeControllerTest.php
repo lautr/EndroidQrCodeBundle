@@ -20,6 +20,8 @@ class QrCodeControllerTest extends WebTestCase
             'text' => 'Life is too short to be generating QR codes',
             'extension' => 'png',
             'size' => 150,
+            'label' => 'Dit is een label',
+            'labelFontSize' => 16,
         )));
 
         return $this->assertEquals(200, $client->getResponse()->getStatusCode());
