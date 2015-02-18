@@ -45,15 +45,16 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * Creates the QR code URL corresponding to the given message.
      *
      * @param $text
-     * @param  int    $size
-     * @param  int    $padding
-     * @param  string $extension
-     * @param  string $errorCorrectionLevel
-     * @param  array  $foregroundColor
-     * @param  array  $backgroundColor
-     * @param  string $label
-     * @param  string $labelFontSize
-     * @param  string $labelFontPath
+     * @param int    $size
+     * @param int    $padding
+     * @param string $extension
+     * @param string $errorCorrectionLevel
+     * @param array  $foregroundColor
+     * @param array  $backgroundColor
+     * @param string $label
+     * @param string $labelFontSize
+     * @param string $labelFontPath
+     *
      * @return mixed
      */
     public function qrcodeUrlFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null, $label = null, $labelFontSize = null, $labelFontPath = null)
@@ -105,15 +106,16 @@ class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
      * Creates the QR code data corresponding to the given message.
      *
      * @param $text
-     * @param  int    $size
-     * @param  int    $padding
-     * @param  string $extension
-     * @param  mixed  $errorCorrectionLevel
-     * @param  array  $foregroundColor
-     * @param  array  $backgroundColor
-     * @param  string $label
-     * @param  string $labelFontSize
-     * @param  string $labelFontPath
+     * @param int    $size
+     * @param int    $padding
+     * @param string $extension
+     * @param mixed  $errorCorrectionLevel
+     * @param array  $foregroundColor
+     * @param array  $backgroundColor
+     * @param string $label
+     * @param string $labelFontSize
+     * @param string $labelFontPath
+     *
      * @return string
      */
     public function qrcodeDataUriFunction($text, $size = null, $padding = null, $extension = null, $errorCorrectionLevel = null, array $foregroundColor = null, array $backgroundColor = null, $label = null, $labelFontSize = null, $labelFontPath = null)
