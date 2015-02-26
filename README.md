@@ -88,6 +88,8 @@ endroid_qr_code:
     labelFontSize: 16
 ```
 
+Alpha channel available range is [0, 127] in foreground and background colors.
+
 ## Twig extension
 
 The bundle also provides a Twig extension for quickly generating QR code urls.
